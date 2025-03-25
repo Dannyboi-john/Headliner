@@ -1,10 +1,16 @@
 const express = require('express');
 const app = express();
+const cors = require("cors");
+const corsOptions = {
+    origin: ["http://localhost:4000"]
+};
 
-const PORT = 5000;
+app.use(cors(corsOptions));
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
+const PORT = 3000;
+
+app.get('/api', (req, res) => {
+    res.json({"fruits": ["apple", "orange", "banana"] });
 })
 
 app.listen(PORT, ()  => {
