@@ -10,7 +10,7 @@ app.use(cors(corsOptions));
 const PORT = 3000;
 
 app.get('/api', (req, res) => {
-    res.json({"fruits": ["apple", "orange", "banana"] });
+    res.json({"fruits": ["Apple", " Orange", " Banana"] });
 })
 
 app.listen(PORT, ()  => {

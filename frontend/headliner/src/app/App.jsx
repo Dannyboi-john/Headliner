@@ -18,7 +18,8 @@ function App() {
     return (
         <>
 
-        <h2>Welcome 2 my web app :3 {info}</h2>
+        <h2>Welcome 2 my web app :3</h2>
+        <h3>{info}</h3>
 
         </>
     )
