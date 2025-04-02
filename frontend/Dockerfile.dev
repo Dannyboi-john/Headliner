@@ -1,0 +1,20 @@
+# Use Node.js as the base image
+FROM node:18
+
+# Set working directory inside container
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the app
+COPY . .
+
+# Expose port (Vite defaults to 5173)
+EXPOSE 5173
+
+# Run the app in development mode
+CMD ["npm", "run", "dev", "--", "--host"]
