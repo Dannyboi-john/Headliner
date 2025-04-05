@@ -1,0 +1,15 @@
+# Ignore environment variable files
+.env*
+
+# Ignore node_modules
+/node_modules/
+
+# Ignore Docker stuff (optional, depending on your setup)
+.docker/
+
+# Ignore log files
+*.log
+
+# Ignore build artifacts
+/dist
+/build
