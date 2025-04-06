@@ -1,18 +1,14 @@
 const express = require('express');
-const app = express();
 const cors = require("cors");
-const corsOptions = {
-    origin: ["http://localhost:4000"]
-};
 
-app.use(cors(corsOptions));
+require('dotenv').config();
 
-const PORT = 3000;
+const app = express();
+app.use(cors());
+app.use(express.json());
 
-app.get('/api', (req, res) => {
-    res.json({"fruits": ["Apple", " Orange", " Banana"] });
-})
+app.use('/api', authRoutes);
 
-app.listen(PORT, ()  => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-})
+app.listen(5000, () => {
+    console.log('Server is running on http://localhost:5000');
+});

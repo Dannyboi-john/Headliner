@@ -9,10 +9,17 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${MYSQL_USER}
+      - DB_PASS=${MYSQL_PASS}
+      - DB_NAME=${MYSQL_DATABASE}
     volumes:
       - ./backend:/app
       - /app/node_modules
     restart: always
+    depends_on:
+      - mysql
     command: npm run dev
 
 
@@ -28,3 +35,20 @@ services:
     depends_on:
       - backend
     restart: always
+
+
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABSE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data
