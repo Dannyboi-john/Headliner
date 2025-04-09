@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require("cors");
+const authRoutes = require('./src/routes/authRoutes');
 
 require('dotenv').config();
 
@@ -12,3 +13,5 @@ app.use('/api', authRoutes);
 app.listen(5000, () => {
     console.log('Server is running on http://localhost:5000');
 });
+
+console.log("Hoooooiiiii :3");
