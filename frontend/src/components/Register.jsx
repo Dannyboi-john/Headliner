@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../App.css';
 
 const Register = () => {
     const [formData, setFormData] = useState({ username: '', password: ''});
@@ -39,40 +40,46 @@ const Register = () => {
 
     return (
         <>
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                name="username"
-                placeholder="Username"
-                value={formData.username}
-                onChange={handleChange}
-                required
-                className="register-form"
-            />
+            <div className="wrapper">
+                <div className="container">
+                    <form 
+                        className="registration-form"
+                        onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            name="username"
+                            placeholder="Username"
+                            value={formData.username}
+                            onChange={handleChange}
+                            required
+                            className="register-form"
+                        />
 
-            <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-                className="register-form"
-            />
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                            className="register-form"
+                        />
 
-            <button
-                type="submit"
-                className="submit-button"
-            >
-                Register12
-            </button>
-        </form>
+                        <button
+                            type="submit"
+                            className="submit-button"
+                        >
+                            Register
+                        </button>
+                    </form>
 
-        {message && (
-            <div>
-                {message}
+                    {message && (
+                        <div>
+                            {message}
+                        </div>
+                    )}
+                </div>
             </div>
-        )}
         </>
     )
 };
