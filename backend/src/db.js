@@ -54,11 +54,13 @@ const attemptConnection = (retries = 5, delay = 5000) => {
     });
 };
 
-// Start attempting connection to MySQL
+/* // Start attempting connection to MySQL
 attemptConnection().then(db => {
     // Export the db connection once it's successfully established
     module.exports = db;
 }).catch(err => {
     console.error(err);
     process.exit(1); // Exit the process if MySQL connection fails after all retries
-});
+}); */
+
+module.exports = attemptConnection();

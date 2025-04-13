@@ -26,7 +26,7 @@ const Register = () => {
             const data = await res.json();
     
             if (res.ok) {
-                setMessage('✅ ${data.message}');
+                setMessage(`'✅ ${data.message}'`);
                 setFormData({ username: '', passowrd: '' });
             } else {
                 setMessage(`❌ ${data.error}`);

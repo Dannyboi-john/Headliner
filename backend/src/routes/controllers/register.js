@@ -1,4 +1,4 @@
-const db = require('../../db');
+const dbPromise = require('../../db');
 const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
@@ -12,6 +12,8 @@ const register = async (req, res) => {
     }
 
     try {
+        const db = await dbPromise;
+
         // Hash the password
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
@@ -25,7 +27,8 @@ const register = async (req, res) => {
                     if (err.code === 'ER_DUP_ENTRY') {
                         return res.status(409).json({ error: 'Username taken' });
                     }
-                    return res.status(500).json({ error: 'Database error' });
+                    console.error('MySQL Error:', err);
+                    return res.status(500).json({ error: 'Database error >:3'});
                 }
 
                 // On success:
