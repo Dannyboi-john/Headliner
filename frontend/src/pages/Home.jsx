@@ -27,11 +27,17 @@ const Home = () => {
                 </nav>
             </header>
 
-            <main className="bg-gradient-to-t from-[#363636] to-[#242424] h-screen">
-                <div className="grid grid-cols-[2fr_1fr] items-center mt-[20%] ml-[5%]"> {/* Container for the body */}
-                    <div className="flex items-center"> {/* Container for the left 2/3rds: logo / header / description */}
-                        <img src={bigIcon} className="w-1/5"/>
-                        <p className="text-6xl font-primary pl-[5%]">Connect with Local Musicians</p>
+            <main className="bg-gradient-to-t from-[#8B28A6] to-[#242424] h-screen">
+                <div className="grid grid-cols-[3fr_2fr] items-start mt-[15%] ml-[3%]"> {/* Container for the body */}
+                    <div className="grid grid-rows-2 items-start mr-[5%] ml-[7%]"> {/* Container for the left 2/3rds: logo / header / description */}
+                        <div className="flex items-center">
+                            <img src={bigIcon} className="w-1/10"/>
+                            <p className="text-7xl font-primary pl-[5%]">Connect with Local Musicians</p>
+                        </div>
+                        <p className="block text-2xl pl-[2%] mt-[2%] italic">Find bandmates, collaborate on projects,
+                            and join the local music scene. Headliner helps you build your
+                            musical network and get in touch with noisemakers in your area.
+                        </p>
                     </div>
                     <div> {/* Container for the right 1/3rd: login & register toggle buttons / login & register forms */}
                     </div>
