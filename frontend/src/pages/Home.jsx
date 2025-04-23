@@ -1,9 +1,14 @@
-import React /*, { useState } */ from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import icon from '../assets/icon-small-nobg.png';
 import bigIcon from '../assets/icon-big-nobg.png';
+import Login from '../components/Login';
+import Register from '../components/Register';
 
 const Home = () => {
+
+    const isNew = useState(true);
+
     console.log("this is my home page  :)");
 
 
@@ -40,6 +45,8 @@ const Home = () => {
                         </p>
                     </div>
                     <div> {/* Container for the right 1/3rd: login & register toggle buttons / login & register forms */}
+                        <Login />
+                        <Register />
                     </div>
                 </div>
             </main>

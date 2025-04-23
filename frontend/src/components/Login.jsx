@@ -4,17 +4,17 @@ const Login = () => {
     const [formData, setFormData] = useState({ username: '', password: ''});
     const [message, setMessage] = useState('');
 
-    const handleChange = e => {
+    const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value});
     };
 
-    const handleSubmit = async e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
             const response = await fetch('http://localhost:5000/api/login', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application.json'},
+                headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify(formData),
             });
 
@@ -27,7 +27,7 @@ const Login = () => {
             }
         } catch (err) {
             console.error(err);
-            setMessage('Error logging in. Try again later ;)');
+            setMessage(`Error logging in! D:`);
         }
     };
 
@@ -37,10 +37,22 @@ const Login = () => {
             {message && <p>{message}</p>}
             <form onSubmit={handleSubmit}>
                 <label>Username: 
-                    <input type="username" name="username" value={formData.username} onchange={handleChange} required />
+                    <input 
+                        placeholder=' Username' 
+                        type="username" 
+                        name="username" 
+                        value={formData.username} 
+                        onChange={handleChange} 
+                        required />
                 </label>
                 <label>Password: 
-                    <input type="password" name="password" value={formData.password} onchange={handleChange} required />
+                    <input 
+                        placeholder=' Password' 
+                        type="password" 
+                        name="password" 
+                        value={formData.password} 
+                        onChange={handleChange} 
+                        required />
                 </label>
                 <button type="submit">Log In</button>
             </form>
