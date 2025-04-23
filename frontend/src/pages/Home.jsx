@@ -36,7 +36,7 @@ const Home = () => {
                         </div>
                         <p className="block text-2xl pl-[2%] mt-[2%] italic">Find bandmates, collaborate on projects,
                             and join the local music scene. Headliner helps you build your
-                            musical network and get in touch with noisemakers in your area.
+                            musical network and get in touch with noise-makers in your area.
                         </p>
                     </div>
                     <div> {/* Container for the right 1/3rd: login & register toggle buttons / login & register forms */}
