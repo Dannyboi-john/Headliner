@@ -17,7 +17,7 @@ const login = (req, res) => {
 
             if (match) {
                 // JWT goes here later???
-                res.json({ message: 'Login successful >:3', userId: user.id })
+                res.json({ message: 'Login successful >:3', user: user })
             } else {
                 res.status(401).json({ error: 'Invalid username or password ;_;' })
             }
