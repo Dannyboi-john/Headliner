@@ -4,6 +4,7 @@ import icon from '../assets/icon-small-nobg.png';
 import bigIcon from '../assets/icon-big-nobg.png';
 import Login from '../components/Login';
 import Register from '../components/Register';
+import Button from '../components/Button';
 
 const Home = () => {
 
@@ -14,7 +15,7 @@ const Home = () => {
 
     return (
         <>
-            <header className="px-4 lg:px-6 h-16 flex items-center border-b border-gray-300">
+            <header className="px-4 lg:px-6 h-16 flex items-center border-b bg-blue-600 border-gray-300">
                 <Link href="/" className="flex items-center gap-2 font-semibold">
                     <img src={icon} className="h-10"/>
                     <span>Headliner</span>
@@ -32,9 +33,9 @@ const Home = () => {
                 </nav>
             </header>
 
-            <main className="bg-gradient-to-t from-[#8B28A6] to-[#242424] h-screen">
-                <div className="grid grid-cols-[3fr_2fr] items-start mt-[15%] ml-[3%]"> {/* Container for the body */}
-                    <div className="grid grid-rows-2 items-start mr-[5%] ml-[7%]"> {/* Container for the left 2/3rds: logo / header / description */}
+            <main className="bg-gradient-to-t from-purple-600 to-blue-600 h-screen">
+                <div className="grid grid-cols-[3fr_2fr] items-start mt-0  ml-[3%] mr-[3%]"> {/* Container for the body */}
+                    <div className="grid grid-rows-2 items-start pt-[30%] mr-[5%] ml-[7%]"> {/* Container for the left 2/3rds: logo / header / description */}
                         <div className="flex items-center">
                             <img src={bigIcon} className="w-1/10"/>
                             <p className="text-7xl font-primary pl-[5%]">Connect with Local Musicians</p>
@@ -44,9 +45,13 @@ const Home = () => {
                             musical network and get in touch with noise-makers in your area.
                         </p>
                     </div>
-                    <div> {/* Container for the right 1/3rd: login & register toggle buttons / login & register forms */}
+                    <div className="pt-[20%]"> {/* Container for the right 1/3rd: login & register toggle buttons / login & register forms */}
+                        <div className="flex flex-row flex-[25%_25%] justify-evenly">
+                            <Button />
+                            <Button />
+                        </div>
                         <Login />
-                        <Register />
+                        {/* <Register /> */}
                     </div>
                 </div>
             </main>
