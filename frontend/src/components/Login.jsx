@@ -32,7 +32,7 @@ const Login = () => {
     };
 
     return (
-        <div className="m-[10%] ml-[20%] mr-[20%] p-[5%] border-4 border-gray-300 bg-indigo-600/40 rounded-[10px]">
+        <div className="mt-[10%] p-[5%] border-4 border-gray-300 bg-indigo-600/40 rounded-[10px]">
             <p className="text-3xl pb-[2%]">Login</p>
             <p className="text-l pb-[5%]">Enter your username and password to access your account</p>
             <form onSubmit={handleSubmit}>

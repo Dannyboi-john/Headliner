@@ -8,16 +8,26 @@ import Button from '../components/Button';
 
 const Home = () => {
 
-    const isNew = useState(true);
+    const [isRegistered, setIsRegistered] = useState(false);
 
-    console.log("this is my home page  :)");
+    const handleShowLogin =(e) => {
+        e.preventDefault();
+        setIsRegistered(true);
+
+    }
+
+    const handleShowRegister =(e) => {
+        e.preventDefault();
+        setIsRegistered(false);
+    }
+
 
 
     return (
         <>
             <header className="px-4 lg:px-6 h-16 flex items-center border-b bg-blue-600 border-gray-300">
                 <Link href="/" className="flex items-center gap-2 font-semibold">
-                    <img src={icon} className="h-10"/>
+                    <img src={bigIcon} className="h-10"/>
                     <span>Headliner</span>
                 </Link>
                 <nav className="ml-auto flex gap-4 sm:gap-6">
@@ -45,13 +55,14 @@ const Home = () => {
                             musical network and get in touch with noise-makers in your area.
                         </p>
                     </div>
-                    <div className="pt-[20%]"> {/* Container for the right 1/3rd: login & register toggle buttons / login & register forms */}
+                    <div className="pt-[20%] ml-[20%] mr-[20%]"> {/* Container for the right 1/3rd: login & register toggle buttons / login & register forms */}
                         <div className="flex flex-row flex-[25%_25%] justify-evenly">
-                            <Button />
-                            <Button />
+                        <Button onClick={handleShowLogin}>Login</Button>
+                        <Button onClick={handleShowRegister}>Register</Button>
                         </div>
-                        <Login />
-                        {/* <Register /> */}
+                        {isRegistered
+                            ? <Login />
+                            : <Register />}
                     </div>
                 </div>
             </main>
