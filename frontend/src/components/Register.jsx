@@ -15,7 +15,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5000/api/register", {
+      const res = await fetch(`${import.meta.env.VITE_APP_API}/api/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,7 +40,7 @@ const Register = () => {
   return (
     <>
       <div className="mt-[10%] p-[5%] border-4 border-gray-300 bg-indigo-600/40 rounded-[10px]">
-        <p className="text-2xl pb-[2%]">Register</p>
+        <p className="text-3xl pb-[2%]">Register</p>
         <p className="text-l pb-[5%]">Sign up to meet fellow musicians and become part of the local music community</p>
         <form className="flex flex-col gap-2.5" onSubmit={handleSubmit}>
           <div className="grid grid-rows-3">
