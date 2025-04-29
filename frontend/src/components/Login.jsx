@@ -40,7 +40,7 @@ const Login = () => {
                     <label className="pb-[8%]">Username:
                         <input 
                             className="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5"
-                            placeholder=' Username' 
+                            placeholder='Username' 
                             type="username" 
                             name="username" 
                             value={formData.username} 
@@ -50,7 +50,7 @@ const Login = () => {
                     <label className="pb-[8%]">Password: 
                         <input 
                             className="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5"
-                            placeholder=' Password' 
+                            placeholder='Password' 
                             type="password" 
                             name="password" 
                             value={formData.password} 
