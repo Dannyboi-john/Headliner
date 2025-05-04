@@ -1,35 +1,38 @@
 import React, { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
+
+const loginUser = async (formdata) => {
+    const response = await fetch (`${import.meta.env.VITE_APP_API}/api/login)`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formdata),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.error || 'Login Failed  :(');
+    }
+
+    return data; // Success case
+}
 
 const Login = () => {
     const [formData, setFormData] = useState({ username: '', password: ''});
     const [message, setMessage] = useState('');
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value});
-    };
+    const mutation = useMutation({
+        mutationFn: loginUser,
+        onSuccess: (data) => {
+            setMessage(`Welcome back, ${data.username || 'user'}!`);
+        },
+        onError: (error) => {
+            setMessage(error.message || 'Error logging in! D:');
+        },
+    });
+    //
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
 
-        try {
-            const response = await fetch(`${import.meta.env.VITE_APP_API}/api/login`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json'},
-                body: JSON.stringify(formData),
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                setMessage(`Welcome back, ${data.user.name || 'user'}!`);
-            } else {
-                setMessage(data.error || `Login failed D:`);
-            }
-        } catch (err) {
-            console.error(err);
-            setMessage(`Error logging in! D:`);
-        }
-    };
 
     return (
         <div className="mt-[10%] p-[5%] border-4 border-gray-300 bg-indigo-600/40 rounded-[10px]">
@@ -60,7 +63,10 @@ const Login = () => {
                     </label>
                     <button 
                         type="submit"
-                        className="text-gray-100 bg-indigo-600 hover:text-white border border-red-50 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center h-1/2">Log In</button>
+                        className="text-gray-100 bg-indigo-600 hover:text-white border border-red-50 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center h-1/2"
+                        >
+                            {mutation.isPending ? 'Logging in...' : 'Login'}
+                    </button>
                 </div>
             </form>
         </div>
