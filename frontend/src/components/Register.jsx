@@ -27,7 +27,7 @@ const Register = () => {
 
       if (res.ok) {
         setMessage(`'✅ ${data.message}'`);
-        setFormData({ username: "", passowrd: "" });
+        setFormData({ username: "", password: "" });
       } else {
         setMessage(`❌ ${data.error}`);
       }

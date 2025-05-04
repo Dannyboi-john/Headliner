@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 
 const loginUser = async (formdata) => {
-    const response = await fetch (`${import.meta.env.VITE_APP_API}/api/login)`, {
+    const response = await fetch(`${import.meta.env.VITE_APP_API}/api/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formdata),
@@ -24,13 +24,21 @@ const Login = () => {
     const mutation = useMutation({
         mutationFn: loginUser,
         onSuccess: (data) => {
-            setMessage(`Welcome back, ${data.username || 'user'}!`);
+            setMessage(`Welcome back, ${data.user.username || 'user'}!`);
         },
         onError: (error) => {
             setMessage(error.message || 'Error logging in! D:');
         },
     });
-    //
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        mutation.mutate(formData);
+    }
 
 
 
