@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 const loginUser = async (formdata) => {
     const response = await fetch(`${import.meta.env.VITE_APP_API}/api/login`, {
@@ -21,6 +22,8 @@ const Login = () => {
     const [formData, setFormData] = useState({ username: '', password: ''});
     const [message, setMessage] = useState('');
 
+    const navigate = useNavigate();
+
     const mutation = useMutation({
         mutationFn: loginUser,
         onSuccess: (data) => {
@@ -38,6 +41,8 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         mutation.mutate(formData);
+
+        navigate('/SomewhereElse');
     }
 
 

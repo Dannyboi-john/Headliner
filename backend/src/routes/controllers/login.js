@@ -1,5 +1,9 @@
 const db = require('../../db');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const SECRET = process.env.JWT_SECRET;
+
 
 const login = (req, res) => {
     const { username, password } = req.body
@@ -16,8 +20,16 @@ const login = (req, res) => {
             const match = await bcrypt.compare(password, user.password_hash);
 
             if (match) {
-                // JWT goes here later???
-                res.json({ message: 'Login successful >:3', user: user })
+                const payload = { id: user.id, username: user.username };
+                const token = jwt.sign(payload, SECRET, {expiresIn: '1h'}); // Set to an hour for now.
+
+
+                res.json({ 
+                    message: 'Login successful >:3 token created!',
+                    token,
+                    user: payload 
+                });
+
             } else {
                 res.status(401).json({ error: 'Invalid username or password ;_;' })
             }
