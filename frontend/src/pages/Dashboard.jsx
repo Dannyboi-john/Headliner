@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const SomewhereElse = () => {
+const Dashboard = () => {
 
     console.log("You are now off the home page");
 
@@ -13,4 +13,4 @@ const SomewhereElse = () => {
     )
 }
 
-export default SomewhereElse;
+export default Dashboard;

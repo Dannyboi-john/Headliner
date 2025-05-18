@@ -27,7 +27,11 @@ const Login = () => {
     const mutation = useMutation({
         mutationFn: loginUser,
         onSuccess: (data) => {
+            console.log("Token: ", data.token);
             setMessage(`Welcome back, ${data.user.username || 'user'}!`);
+            navigate('/Dashboard');
+
+            localStorage.setItem('token', data.token);
         },
         onError: (error) => {
             setMessage(error.message || 'Error logging in! D:');
@@ -41,8 +45,6 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         mutation.mutate(formData);
-
-        navigate('/SomewhereElse');
     }
 
 

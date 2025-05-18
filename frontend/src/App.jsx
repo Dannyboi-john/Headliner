@@ -2,14 +2,14 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./components/Register";
 import Home from "./pages/Home";
-import SomewhereElse from "./pages/SomewhereElse";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/SomewhereElse" element={<SomewhereElse />} />
+        <Route path="/Dashboard" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   );
