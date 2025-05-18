@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import icon from '../assets/icon-small-nobg.png';
 import bigIcon from '../assets/icon-big-nobg.png';
 import Login from '../components/Login';
 import Register from '../components/Register';

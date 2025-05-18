@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const SECRET = process.env.JWT_SECRET;
+const REFRESH_SECRET = process.env.REFRESH_SECRET;
 
 
 const login = (req, res) => {
@@ -22,6 +23,7 @@ const login = (req, res) => {
             if (match) {
                 const payload = { id: user.id, username: user.username };
                 const token = jwt.sign(payload, SECRET, {expiresIn: '1h'}); // Set to an hour for now.
+                const refreshToken = jwt.sign(payload, REFRESH_SECRET, { expiresIn: '24h' });
 
 
                 res.json({ 

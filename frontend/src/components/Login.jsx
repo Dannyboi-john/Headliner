@@ -32,6 +32,7 @@ const Login = () => {
             navigate('/Dashboard');
 
             localStorage.setItem('token', data.token);
+            localStorage.setItem('refreshToken',  data.refreshToken)
         },
         onError: (error) => {
             setMessage(error.message || 'Error logging in! D:');
