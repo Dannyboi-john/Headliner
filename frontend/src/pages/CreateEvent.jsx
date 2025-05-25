@@ -7,10 +7,11 @@ import plusIcon from '../assets/plus-circle.svg';
 const CreateEvent = () => {
 
     const navigate = useNavigate();
+
     const handleDashboardNav = (e) => {
         e.preventDefault();
         navigate("/Dashboard");
-    }
+    };
 
     const [event, setEvent] = useState({
         title: '',
@@ -18,7 +19,8 @@ const CreateEvent = () => {
         endTime: '',
         startTime: '',
         details: '',
-        image: ''
+        imageFile: null,
+        imagePreview: ''
     });
 
     const handleChange = (e) => {
@@ -27,6 +29,21 @@ const CreateEvent = () => {
             ...prev,
             [name]: value,
         }));
+    };
+
+    const handleImageUpload =(e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setEvent((prev) => ({
+                    ...prev,
+                    imageFile: file,
+                    imagePreview: reader.result
+                }));
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
 
@@ -114,12 +131,12 @@ const CreateEvent = () => {
                         </div>
 
                         <div className="md:col-span-2">
-                        <label className="block font-medium">Image URL</label>
+                        <label className="block font-medium">Upload Image</label>
                         <input
-                            type="text"
-                            name="image"
+                            type="file"
+                            name="image/*"
                             value={event.image}
-                            onChange={handleChange}
+                            onChange={handleImageUpload}
                             className="w-full border p-2 rounded"
                         />
                         </div>
@@ -145,9 +162,9 @@ const CreateEvent = () => {
                         <strong>Details:</strong> {event.details || 'N/A'}
                         </p>
 
-                        {event.image && (
+                        {event.imagePreview && (
                         <img
-                            src={event.image}
+                            src={event.imagePreview}
                             alt="Event"
                             className="mt-4 max-h-64 object-cover rounded border"
                         />
