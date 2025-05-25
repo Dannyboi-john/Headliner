@@ -5,7 +5,7 @@ const SECRET = process.env.SECRET;
 const refresh = (req, res) => {
     const { refreshToken } = req.body;
 
-    if (!refreshToken) return res.status(401).json({ error: 'No token provided'});
+    if (!refreshToken) return res.status(400).json({ error: 'No token provided'});
 
     jwt.verify(refreshToken, REFRESH_SECRET, (err, user) => {
         if (err) return res.status(403).json({ error: 'Invalid token'});

@@ -29,7 +29,8 @@ const login = (req, res) => {
                 res.json({ 
                     message: 'Login successful >:3 token created!',
                     token,
-                    user: payload 
+                    refreshToken,
+                    user: payload
                 });
 
             } else {

@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import bigIcon from '../assets/icon-big-nobg.png';
 import { useNavigate } from 'react-router-dom';
+import plusIcon from '../assets/plus-circle.svg';
 
 const Dashboard = () => {
 
-
+    const navigate = useNavigate();
+/* 
     const [token, setToken] = useState('');
     // const navigate = useNavigate();
 
@@ -14,7 +16,11 @@ const Dashboard = () => {
         setToken(accessToken || 'No token found');
       }, []);
 
-    console.log("You are now off the home page");
+    console.log("You are now off the home page"); */
+
+    const handleCreateEvent = () => {
+        navigate('/CreateEvent');
+    }
 
     return (
         <>
@@ -36,11 +42,16 @@ const Dashboard = () => {
                 </nav>
             </header>
 
-            <main className="bg-gradient-to-t from-purple-600 to-blue-600 h-screen">
-                <div>
-                    <p className="text-wrap">
-                        {token}
-                    </p>
+            <main className="bg-gradient-to-t from-purple-600 to-blue-600 h-screen pt-[2%]">
+                <div className="flex justify-center items-center">
+                    <div className="items-center justify-center rounded-[45px] cursor-pointer flex bg-cyan-500/40 h-[40vh] w-[30vw]"
+                        onClick={handleCreateEvent}>
+                        <div className="items-center justify-center">
+                            <img src={plusIcon} className="m-auto block h-20" />
+                            <p className="pt-[10%] text-3xl">Create an event</p>
+                        </div>
+                        
+                    </div>
                 </div>
             </main>
         </>
