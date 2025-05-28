@@ -15,8 +15,7 @@ const Dashboard = () => {
         const accessToken = localStorage.getItem('token');
         setToken(accessToken || 'No token found');
       }, []);
-
-    console.log("You are now off the home page"); */
+ */
 
     const handleCreateEvent = () => {
         navigate('/CreateEvent');

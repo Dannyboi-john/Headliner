@@ -54,3 +54,6 @@ h1 {
   }
 }
  */
+ .header-link {
+  @apply text-sm font-medium font-sans hover:underline underline-offset-4 cursor-pointer;
+ }

@@ -30,13 +30,13 @@ const Home = () => {
                     <span>Headliner</span>
                 </Link>
                 <nav className="ml-auto flex gap-4 sm:gap-6">
-                    <span className="text-sm font-medium font-sans hover:underline underline-offset-4 cursor-pointer">
+                    <span className="header-link">
                         Features
                     </span>
-                    <span className="text-sm font-medium font-sans hover:underline underline-offset-4 cursor-pointer">
+                    <span className="header-link">
                         About
                     </span>
-                    <span className="text-sm font-medium font-sans hover:underline underline-offset-4 cursor-pointer">
+                    <span className="header-link">
                         Contact
                     </span>
                 </nav>
