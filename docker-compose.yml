@@ -48,5 +48,19 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
 
+  dbmate:
+    image: amacneil/dbmate
+    depends_on:
+      mysql:
+        condition: service_healthy
+    env_file:
+      - ./.env
+    environment:
+      - DATABASE_URL=mysql://root:thisismyrootpasswordsucka@mysql:3306/headliner_db
+    volumes:
+      - ./backend/db/migrations:/db/migrations
+    entrypoint: dbmate
+    command: ["--wait", "up"]
+
 volumes:
   mysql_data: {}
