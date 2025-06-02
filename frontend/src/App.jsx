@@ -4,13 +4,14 @@ import Register from "./components/Register";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import CreateEvent from "./pages/CreateEvent"
+import ProtectedRoute from './utilities/ProtectedRoute';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/Dashboard" element={<Dashboard />} />
+        <Route path="/Dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/CreateEvent" element={<CreateEvent />} />
       </Routes>
     </BrowserRouter>
