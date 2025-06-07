@@ -7,15 +7,6 @@ import plusIcon from '../assets/plus-circle.svg';
 const Dashboard = () => {
 
     const navigate = useNavigate();
-/* 
-    const [token, setToken] = useState('');
-    // const navigate = useNavigate();
-
-    useEffect(() => {
-        const accessToken = localStorage.getItem('token');
-        setToken(accessToken || 'No token found');
-      }, []);
- */
 
     const handleCreateEvent = () => {
         navigate('/CreateEvent');

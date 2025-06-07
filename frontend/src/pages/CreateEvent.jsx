@@ -47,6 +47,38 @@ const CreateEvent = () => {
     };
 
 
+    const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('title', event.title);
+    formData.append('location', event.location);
+    formData.append('startTime', event.startTime);
+    formData.append('endTime', event.endTime);
+    formData.append('details', event.details);
+    if (event.imageFile) {
+        formData.append('image', event.imageFile);
+    }
+
+    try {
+        const response = await fetch(`${import.meta.env.VITE_APP_API}/api/events`, {
+        method: 'POST',
+        body: formData
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+        alert('Event created successfully!');
+        navigate('/Dashboard');
+        } else {
+        alert(data.error || 'Error creating event.');
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Network error.');
+    }
+    };
+
 
     return (
         <>
@@ -171,6 +203,12 @@ const CreateEvent = () => {
                         )}
                     </div>
                 </div>
+
+                <button onClick={handleSubmit}
+                className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+                >
+                    Create Event
+                </button>
             </main>
 
         </>
