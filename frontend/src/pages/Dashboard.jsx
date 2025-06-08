@@ -19,6 +19,7 @@ const Dashboard = () => {
         axios.get(`${import.meta.env.VITE_APP_API}/api/events`)
             .then(res => setEvents(res.data))
             .catch(err => console.error('Error fetching events', err));
+            
     }, []);
 
     return (
@@ -41,37 +42,40 @@ const Dashboard = () => {
                 </nav>
             </header>
 
+           {/*  "min-h-screen bg-gradient-to-br from-indigo-600 to-indigo-300 bg-fixed bg-no-repeat bg-cover" */}
+
             <main className="bg-gradient-to-t from-purple-600 to-blue-600 h-screen pt-[2%]">
 
                 <div className="p-4">
                     <h1 className="text-2xl font-bold mb-4">Upcoming Events</h1>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                       {events.map(event => (
-                    <div key={event.id} className="bg-white p-4 rounded shadow">
-                        <h2 className="text-xl font-semibold">{event.event_name}</h2>
-                        <p className="text-sm text-gray-600">{event.event_location}</p>
-                        <p className="text-sm text-gray-600">
-                            {new Date(event.start_time).toLocaleString()} → {new Date(event.end_time).toLocaleString()}
-                        </p>
-                        {event.image_url && (
-                            <img src={event.image_url} alt="event" className="mt-2 rounded" />
-                        )}
-                        <p className="mt-2">{event.event_description}</p>
+                        {events.map(event => (
+                            <div key={event.id} className="bg-white text-black p-4 rounded shadow">
+                                <h2 className="text-xl font-semibold">{event.event_name}</h2>
+                                <p className="text-sm text-gray-600">{event.event_location}</p>
+                                <p className="text-sm text-gray-600">
+                                    {new Date(event.start_time).toLocaleString()} → {new Date(event.end_time).toLocaleString()}
+                                </p>
+                                {event.image_url && (
+                                    <img src={`http://localhost:5000${event.image_url}`} alt="event" className="w-full h-40 object-cover mt-2 rounded" />
+                                )}
+                                <p className="mt-2">{event.event_description}</p>
+                            </div>
+                        ))} 
+
+                        <div className="items-center justify-center rounded-[45px] cursor-pointer flex bg-cyan-500/40 h-[40vh] w-[30vw]"
+                            onClick={handleCreateEvent}>
+                            <div className="items-center justify-center">
+                                <img src={plusIcon} className="m-auto block h-20" />
+                                <p className="pt-[10%] text-3xl">Create an event</p>
+                            </div>
+                        
                     </div>
-                ))} 
+                        
+
                     </div>
                 </div>
 
-                <div className="flex justify-center items-center">
-                    <div className="items-center justify-center rounded-[45px] cursor-pointer flex bg-cyan-500/40 h-[40vh] w-[30vw]"
-                        onClick={handleCreateEvent}>
-                        <div className="items-center justify-center">
-                            <img src={plusIcon} className="m-auto block h-20" />
-                            <p className="pt-[10%] text-3xl">Create an event</p>
-                        </div>
-                        
-                    </div>
-                </div>
             </main>
         </>
     )

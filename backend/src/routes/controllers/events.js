@@ -8,7 +8,7 @@ const db = require('../../db')
 // Multer setup
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const uploadDir = path.join(__dirname, '../uploads');
+        const uploadDir = path.join(__dirname, '../../uploads');
         if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
         cb(null, uploadDir);
     },
@@ -30,6 +30,7 @@ router.post('/', upload.single('image'), async (req, res) => {
     } = req.body;
 
     const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
+
 
     try {
         const [results] = await db.execute(
