@@ -3,14 +3,23 @@ import { Link } from 'react-router-dom';
 import bigIcon from '../assets/icon-big-nobg.png';
 import { useNavigate } from 'react-router-dom';
 import plusIcon from '../assets/plus-circle.svg';
+import axios from 'axios';
 
 const Dashboard = () => {
 
     const navigate = useNavigate();
 
+    const [events, setEvents] = useState([]);
+
     const handleCreateEvent = () => {
         navigate('/CreateEvent');
     }
+
+    useEffect(() => {
+        axios.get(`${import.meta.env.VITE_APP_API}/api/events`)
+            .then(res => setEvents(res.data))
+            .catch(err => console.error('Error fetching events', err));
+    }, []);
 
     return (
         <>
@@ -33,6 +42,26 @@ const Dashboard = () => {
             </header>
 
             <main className="bg-gradient-to-t from-purple-600 to-blue-600 h-screen pt-[2%]">
+
+                <div className="p-4">
+                    <h1 className="text-2xl font-bold mb-4">Upcoming Events</h1>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                       {events.map(event => (
+                    <div key={event.id} className="bg-white p-4 rounded shadow">
+                        <h2 className="text-xl font-semibold">{event.event_name}</h2>
+                        <p className="text-sm text-gray-600">{event.event_location}</p>
+                        <p className="text-sm text-gray-600">
+                            {new Date(event.start_time).toLocaleString()} → {new Date(event.end_time).toLocaleString()}
+                        </p>
+                        {event.image_url && (
+                            <img src={event.image_url} alt="event" className="mt-2 rounded" />
+                        )}
+                        <p className="mt-2">{event.event_description}</p>
+                    </div>
+                ))} 
+                    </div>
+                </div>
+
                 <div className="flex justify-center items-center">
                     <div className="items-center justify-center rounded-[45px] cursor-pointer flex bg-cyan-500/40 h-[40vh] w-[30vw]"
                         onClick={handleCreateEvent}>

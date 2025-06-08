@@ -43,4 +43,15 @@ router.post('/', upload.single('image'), async (req, res) => {
     }
 });
 
+// Get route for displaying events
+router.get('/', async (req, res) => {
+    try {
+        const [rows] = await db.execute('SELECT * FROM events ORDER BY start_time ASC');
+        res.json(rows);
+    } catch (error) {
+        console.error('Error fetching events: ', error);
+        res.status(500).json({ error: 'Failed to fetch events' });
+    }
+});
+
 module.exports = router;
