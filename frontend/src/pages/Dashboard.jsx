@@ -42,9 +42,9 @@ const Dashboard = () => {
                 </nav>
             </header>
 
-           {/*  "min-h-screen bg-gradient-to-br from-indigo-600 to-indigo-300 bg-fixed bg-no-repeat bg-cover" */}
 
-            <main className="bg-gradient-to-t from-purple-600 to-blue-600 h-screen pt-[2%]">
+
+            <main className="bg-gradient-to-t from-purple-600 to-blue-600 h-full pt-[2%]">
 
                 <div className="p-4">
                     <h1 className="text-2xl font-bold mb-4">Upcoming Events</h1>

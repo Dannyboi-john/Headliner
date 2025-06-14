@@ -12,7 +12,7 @@ export async function authFetch(url, options = {}) {
 
     // If access token is expired:
     if (res.status === 401 && refreshToken) {
-        const refreshRes = await fetch('http://localhost:5000/src/routes/controllers/refresh', {
+        const refreshRes = await fetch('http://localhost:5000/api/refresh', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ refreshToken })
@@ -37,7 +37,7 @@ export async function authFetch(url, options = {}) {
             // Refresh failed --> log out
             localStorage.removeItem('token');
             localStorage.removeItem('refreshToken');
-            window.location.href = '/Home';
+            window.location.href = '/';
         }
     
     }

@@ -12,10 +12,10 @@ const isTokenValid = (token) =>  {
 };
 
 const ProtectedRoute = ({ children }) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('refreshToken');
 
     if (!token || !isTokenValid(token)) {
-        return <Navigate to="/Home" replace />
+        return <Navigate to="/" replace />
     }
 
     return children;
