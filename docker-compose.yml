@@ -48,6 +48,7 @@ services:
       - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./backend/init-user.sql:/docker-entrypoint-initdb.d/init-user.sql:ro
 
   dbmate:
     image: amacneil/dbmate
@@ -57,10 +58,9 @@ services:
     env_file:
       - ./.env
     environment:
-      - DATABASE_URL=mysql://root:thisismyrootpasswordsucka@mysql:3306/headliner_db
+      - DATABASE_URL=${DATABASE_URL}
     volumes:
       - ./backend/db/migrations:/db/migrations
-    entrypoint: dbmate
     command: ["--wait", "up"]
 
 volumes:

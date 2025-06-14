@@ -23,6 +23,8 @@ html {
 }
 
 
+
+
 /* TW for later */
 /* bg-gradient-to-br from-white via-[#242424] to-[#808080] */
 
@@ -55,5 +57,5 @@ h1 {
 }
  */
  .header-link {
-  @apply text-sm font-medium font-sans hover:underline underline-offset-4 cursor-pointer;
+    @apply text-sm font-medium font-sans hover:underline underline-offset-4 cursor-pointer;
  }
