@@ -73,7 +73,7 @@ const CreateEvent = () => {
     formData.append('title', event.title);
     formData.append('location', event.location);
     formData.append('startTime', event.startTime);
-    formData.append('endTime', endTime);
+    formData.append('endTime', event.endTime);
     formData.append('details', event.details);
     if (event.imageFile) {
         formData.append('image', event.imageFile);
