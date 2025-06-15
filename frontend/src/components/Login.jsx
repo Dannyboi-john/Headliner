@@ -29,6 +29,7 @@ const Login = () => {
         onSuccess: (data) => {
             setMessage(`Welcome back, ${data.user.username || 'user'}!`);
             navigate('/Dashboard');
+            console.log("let's go to the dashboard!");
 
             localStorage.setItem('token', data.token);
             localStorage.setItem('refreshToken',  data.refreshToken)

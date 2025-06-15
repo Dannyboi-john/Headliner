@@ -44,7 +44,7 @@ const Dashboard = () => {
 
 
 
-            <main className="bg-gradient-to-t from-purple-600 to-blue-600 h-full pt-[2%]">
+            <main className="bg-gradient-to-t from-purple-600 to-blue-600 min-h-screen pt-[2%]">
 
                 <div className="p-4">
                     <h1 className="text-2xl font-bold mb-4">Upcoming Events</h1>

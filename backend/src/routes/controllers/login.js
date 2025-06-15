@@ -26,8 +26,8 @@ const login = async (req, res) => {
         }
 
         const payload = { id: user.id, username: user.username };
-        const token = jwt.sign(payload, SECRET, { expiresIn: '10s' });
-        const refreshToken = jwt.sign(payload, REFRESH_SECRET, { expiresIn: '20s' });
+        const token = jwt.sign(payload, SECRET, { expiresIn: '1h' });
+        const refreshToken = jwt.sign(payload, REFRESH_SECRET, { expiresIn: '24h' });
 
         res.json({
             message: 'Login successful >:3 token created!',
