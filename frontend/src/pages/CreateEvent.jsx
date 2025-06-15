@@ -162,37 +162,21 @@ const CreateEvent = () => {
                         />
                         </div>
 
-                        <div className="md:col-span-2">
-                        <label className="block font-medium">Upload Image</label>
+                        <button className="md:col-span-2">
+                        {/* <label className="block font-medium">Upload Image</label> */}
                         <input
                             type="file"
                             name="image/*"
                             value={event.image}
                             onChange={handleImageUpload}
-                            className="w-full border p-2 rounded"
+                            className="px-4 py-2 bg-green-600 cursor-pointer text-white rounded hover:bg-green-700"
                         />
-                        </div>
+                        </button>
                     </div>
 
                     {/* Live Preview */}
                     <div className="border rounded-lg p-6 bg-gray-50 w-[25%]">
                         <h2 className="text-xl text-gray-900 font-semibold mb-2">{event.title || 'Event Title'}</h2>
-
-                        <p className="text-gray-600 mb-1">
-                        <strong>Where:</strong> {event.location || 'TBD'}
-                        </p>
-
-                        <p className="text-gray-600 mb-1">
-                        <strong>When:</strong> {event.startTime || 'N/A'}
-                        </p>
-
-                        <p className="text-gray-600 mb-1">
-                        <strong>Until:</strong> {event.endTime || 'N/A'}
-                        </p>
-
-                        <p className="text-gray-600 text-wrap mb-1">
-                        <strong>Details:</strong> {event.details || 'N/A'}
-                        </p>
 
                         {event.imagePreview && (
                         <img
@@ -201,14 +185,34 @@ const CreateEvent = () => {
                             className="mt-4 max-h-64 object-cover rounded border"
                         />
                         )}
+
+                        <p className="text-gray-600 mb-1">
+                        <strong>Where:</strong> {event.location || 'TBD'}
+                        </p>
+
+                        <p className="text-gray-600 mb-1">
+                        <strong>Start Time:</strong> {event.startTime || 'N/A'}
+                        </p>
+
+                        <p className="text-gray-600 mb-1">
+                        <strong>End Time:</strong> {event.endTime || 'N/A'}
+                        </p>
+
+                        <p className="text-gray-600 text-wrap mb-1">
+                        <strong>Details:</strong> {event.details || 'N/A'}
+                        </p>
+
+                        
                     </div>
                 </div>
 
+            <div className="flex justify-center pt-[5%]">
                 <button onClick={handleSubmit}
-                className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+                className="px-8 py-4 bg-green-600 cursor-pointer text-white rounded hover:bg-green-700"
                 >
                     Create Event
                 </button>
+            </div>
             </main>
 
         </>
