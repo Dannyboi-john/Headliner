@@ -16,7 +16,7 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_APP_API}/api/events`)
+        axios.get(`${import.meta.env.VITE_APP_API}/api/events/`)
             .then(res => setEvents(res.data))
             .catch(err => console.error('Error fetching events', err));
             
@@ -50,17 +50,19 @@ const Dashboard = () => {
                     <h1 className="text-2xl font-bold mb-4">Upcoming Events</h1>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {events.map(event => (
-                            <div key={event.id} className="bg-white text-black p-4 rounded shadow">
-                                <h2 className="text-xl font-semibold">{event.event_name}</h2>
-                                <p className="text-sm text-gray-600">{event.event_location}</p>
-                                <p className="text-sm text-gray-600">
-                                    {new Date(event.start_time).toLocaleString()} → {new Date(event.end_time).toLocaleString()}
-                                </p>
-                                {event.image_url && (
-                                    <img src={`http://localhost:5000${event.image_url}`} alt="event" className="w-full h-40 object-cover mt-2 rounded" />
-                                )}
-                                <p className="mt-2">{event.event_description}</p>
-                            </div>
+        
+                            <Link to={`/events/${event.id}`} key={event.id} className="bg-white text-black p-4 rounded shadow">
+                                
+                                    <h2 className="text-xl font-semibold">{event.event_name}</h2>
+                                    <p className="text-sm text-gray-600">{event.event_location}</p>
+                                    <p className="text-sm text-gray-600">
+                                        {new Date(event.start_time).toLocaleString()} → {new Date(event.end_time).toLocaleString()}
+                                    </p>
+                                    {event.image_url && (
+                                        <img src={`http://localhost:5000${event.image_url}`} alt="event" className="w-full h-40 object-cover mt-2 rounded" />
+                                    )}
+                                    <p className="mt-2">{event.event_description}</p>
+                                </Link>
                         ))} 
 
                         <div className="items-center justify-center rounded-[45px] cursor-pointer flex bg-cyan-500/40 h-[40vh] w-[30vw]"
