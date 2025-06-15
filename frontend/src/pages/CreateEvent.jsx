@@ -47,6 +47,25 @@ const CreateEvent = () => {
     };
 
 
+    const formatDateTime = (datetimeString) => {
+        const date = new Date(datetimeString);
+        if (isNaN(date.getTime())) {
+            // Invalid date
+            return '';
+        }
+
+    return new Intl.DateTimeFormat('en-GB', {
+        weekday: 'long',
+        day: '2-digit',
+        month: 'long',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+    })
+        .format(date)
+    };
+
+
     const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -54,7 +73,7 @@ const CreateEvent = () => {
     formData.append('title', event.title);
     formData.append('location', event.location);
     formData.append('startTime', event.startTime);
-    formData.append('endTime', event.endTime);
+    formData.append('endTime', endTime);
     formData.append('details', event.details);
     if (event.imageFile) {
         formData.append('image', event.imageFile);
@@ -191,11 +210,11 @@ const CreateEvent = () => {
                         </p>
 
                         <p className="text-gray-600 mb-1">
-                        <strong>Start Time:</strong> {event.startTime || 'N/A'}
+                        <strong>Start Time:</strong> {formatDateTime(event.startTime) || 'N/A'}
                         </p>
 
                         <p className="text-gray-600 mb-1">
-                        <strong>End Time:</strong> {event.endTime || 'N/A'}
+                        <strong>End Time:</strong> {formatDateTime(event.endTime) || 'N/A'}
                         </p>
 
                         <p className="text-gray-600 text-wrap mb-1">
