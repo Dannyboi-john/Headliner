@@ -11,10 +11,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/events/:id" element={<EventPage />} />
+        <Route path="/events/:id" element={<ProtectedRoute><EventPage /></ProtectedRoute>} />
         <Route path="/" element={<Home />}></Route>
         <Route path="/Dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-        <Route path="/CreateEvent" element={<CreateEvent />} />
+        <Route path="/CreateEvent" element={<ProtectedRoute><CreateEvent /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );
