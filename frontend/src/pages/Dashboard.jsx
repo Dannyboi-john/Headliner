@@ -16,10 +16,22 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_APP_API}/api/events/`)
-            .then(res => setEvents(res.data))
-            .catch(err => console.error('Error fetching events', err));
-            
+        const fetchEvents = async () => {
+            const token = localStorage.getItem('token');
+
+            try {
+                const res = await axios.get(`${import.meta.env.VITE_APP_API}/api/events/`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setEvents(res.data);
+            } catch (err) {
+                console.error('Error fetching events :(', err);
+            }
+        };
+
+        fetchEvents();          
     }, []);
 
     return (

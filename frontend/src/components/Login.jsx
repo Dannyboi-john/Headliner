@@ -32,7 +32,7 @@ const Login = () => {
             console.log("let's go to the dashboard!");
 
             localStorage.setItem('token', data.token);
-            localStorage.setItem('refreshToken',  data.refreshToken)
+            localStorage.setItem('refreshToken',  data.refreshToken);
         },
         onError: (error) => {
             setMessage(error.message || 'Error logging in! D:');

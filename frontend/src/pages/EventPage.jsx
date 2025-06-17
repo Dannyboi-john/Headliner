@@ -9,9 +9,22 @@ const EventPage = () => {
     const [event, setEvent] = useState(null);
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_APP_API}/api/events/${id}`)
-            .then(res => setEvent(res.data))
-            .catch(err => console.error(err));
+        const fetchEvents = async () => {
+            const token = localStorage.getItem('token');
+
+            try {
+                const res = await axios.get(`${import.meta.env.VITE_APP_API}/api/events/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setEvent(res.data);
+            } catch (err) {
+                console.error('Unauthorized or failed to fetch event :(', err);
+            }
+        };
+
+        fetchEvents();
     }, [id]);
 
 

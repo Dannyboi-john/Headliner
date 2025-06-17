@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import bigIcon from '../assets/icon-big-nobg.png';
 import { useNavigate } from 'react-router-dom';
 import plusIcon from '../assets/plus-circle.svg';
+import { useParams } from 'react-router-dom';
 
 const CreateEvent = () => {
 
     const navigate = useNavigate();
+
+    const { id } = useParams();
 
     const handleDashboardNav = (e) => {
         e.preventDefault();
@@ -69,6 +72,8 @@ const CreateEvent = () => {
     const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log(event);
+
     const formData = new FormData();
     formData.append('title', event.title);
     formData.append('location', event.location);
@@ -79,18 +84,23 @@ const CreateEvent = () => {
         formData.append('image', event.imageFile);
     }
 
+    const token = localStorage.getItem('token');
+
     try {
         const response = await fetch(`${import.meta.env.VITE_APP_API}/api/events`, {
-        method: 'POST',
-        body: formData
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer: ${token}`
+            },
+            body: formData
         });
 
         const data = await response.json();
         if (response.ok) {
-        alert('Event created successfully!');
-        navigate('/Dashboard');
+            alert('Event created successfully!');
+            navigate(`/events/${data.eventId}`);
         } else {
-        alert(data.error || 'Error creating event.');
+            alert(data.error || 'Error creating event.');
         }
     } catch (err) {
         console.error(err);
