@@ -9,8 +9,6 @@ const eventRoutes = require('./controllers/events');
 const authenticateToken = require('./controllers/authMiddleware');
 
 
-
-
 router.post('/login', loginController);
 router.post('/register', registercontroller);
 router.post('/refresh', refreshController);
