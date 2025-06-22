@@ -5,15 +5,36 @@ import { useNavigate } from 'react-router-dom';
 import plusIcon from '../assets/plus-circle.svg';
 import axios from 'axios';
 
-const Dashboard = () => {
+const Dashboard = ({ eventId }) => {
 
     const navigate = useNavigate();
 
     const [events, setEvents] = useState([]);
 
+    const [selected, setSelected] = useState(null);
+
+    const [selectedReactions, setSelectedReactions] = useState({});
+
     const handleCreateEvent = () => {
         navigate('/CreateEvent');
     }
+
+    const handleReact = async (eventId, reaction) => {
+        try {
+            await axios.post(`${import.meta.env.VITE_APP_API}/api/attendance/${eventId}`, { reaction }, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+            setSelected(reaction);
+            setSelectedReactions(prev => ({
+                ...prev,
+                [eventId]: reaction,
+            }));
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -62,9 +83,11 @@ const Dashboard = () => {
                     <h1 className="text-2xl font-bold mb-4">Upcoming Events</h1>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {events.map(event => (
-        
-                            <Link to={`/events/${event.id}`} key={event.id} className="bg-white text-black p-4 rounded shadow">
-                                
+
+
+                            <div key={event.id} className="bg-white text-black p-4 rounded shadow">
+                                <Link to={`/events/${event.id}`}>
+                                    
                                     <h2 className="text-xl font-semibold">{event.event_name}</h2>
                                     <p className="text-sm text-gray-600">{event.event_location}</p>
                                     <p className="text-sm text-gray-600">
@@ -75,7 +98,25 @@ const Dashboard = () => {
                                     )}
                                     <p className="mt-2">{event.event_description}</p>
                                 </Link>
-                        ))} 
+
+                                <div className="flex space-x-4 mt-4">
+                                    {['Going', 'Interested', 'Liked'].map((reaction) => (
+                                        <button
+                                            key={reaction}
+                                            className={`px-4 py-2 rounded transition ${
+                                                selectedReactions[event.id] === reaction
+                                                    ? 'bg-blue-600 text-white'
+                                                    : 'bg-gray-200 hover:bg-blue-500 hover:text-white'
+                                                }`}
+                                            onClick={() => handleReact(event.id, reaction)}
+                                        >
+                                            {reaction}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            ))} 
 
                         <div className="items-center justify-center rounded-[45px] cursor-pointer flex bg-cyan-500/40 h-[40vh] w-[30vw]"
                             onClick={handleCreateEvent}>

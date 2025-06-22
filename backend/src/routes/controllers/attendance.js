@@ -1,48 +1,26 @@
-/* const db = require('../../db');
 const express = require('express');
 const router = express.Router();
+const db = require('../../db');
 
-const respondToEvent = async (req, res) => {
-    const { status } = req.body;
+router.post('/:eventId', async (req, res) => {
+    console.log('req.user: ', req.user);
+    const { reaction } = req.body;
+    const status = reaction;
     const userId = req.user.id;
-    const eventId = req.params.id;
+    const eventId = req.params.eventId;
 
     try {
-        const [existing] = await db.query(`
-            SELECT * FROM event_attendance
-            WHERE user_id = ? AND event_id = ? AND status = ?
-        `, [userId, eventId, status]);
-
-        if (existing.length > 0) {
-            await db.query(`
-                DELETE FROM event_attendance
-                WHERE user_id = ? AND event_id = ? AND status = ?
-            `, [userId, eventId, status]);
-
-            return res.json({ message: `${status} removed.`})
-        }
-
-
-        if (status === 'Going' || status === 'Interested') {
-            await db.query(`
-                DELETE FROM event_attendance
-                WHERE user_id = ? AND event_id = ? AND status IN ('Going', 'Interested)
-            `, [userId, eventId])
-        }
-
         await db.query(`
-            INSERT INTO event_attendance (user_id, event_id, status)\
+            INSERT INTO event_attendance (user_id, event_id, status)
             VALUES (?, ?, ?)
-        `, [userId, eventId, status]);
+            ON DUPLICATE KEY UPDATE status = VALUES(status)
+        `, [userId, eventId, reaction]);
 
-        res.json({ message: `${status} recorded.` });
-
+        res.status(200).json({ message: 'reaction updated' });
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Uh-oh, something went wrong' });
+        console.error('DB Error:  ',  err);
+        res.status(500).json({ error: err.message})
     }
-};
+});
 
-module.exports = {
-    respondToEvent
-}; */
+module.exports = router;

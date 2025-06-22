@@ -12,4 +12,4 @@ CREATE TABLE event_attendance (
 );
 
 -- migrate:down
-DROP TABLE IF EXISTS event_attentance;
+DROP TABLE IF EXISTS event_attendance;
