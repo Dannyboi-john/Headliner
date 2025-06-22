@@ -15,6 +15,24 @@ const Dashboard = ({ eventId }) => {
 
     const [selectedReactions, setSelectedReactions] = useState({});
 
+    const fetchReactions = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const res = await axios.get(`${import.meta.env.VITE_APP_API}/api/attendance`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            const reactionsMap = {};
+            res.data.forEach(({ event_id, status }) => {
+                reactionsMap[event_id] = status;
+            });
+
+            setSelectedReactions(reactionsMap);
+        } catch (err) {
+            console.error('Error fetching reactions', err);
+        };
+    }
+
     const handleCreateEvent = () => {
         navigate('/CreateEvent');
     }
@@ -52,7 +70,8 @@ const Dashboard = ({ eventId }) => {
             }
         };
 
-        fetchEvents();          
+        fetchEvents();
+        fetchReactions();         
     }, []);
 
     return (
