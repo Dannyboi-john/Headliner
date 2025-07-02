@@ -101,8 +101,7 @@ const Dashboard = ({ eventId }) => {
                 <div className="p-4">
                     <h1 className="text-2xl font-bold mb-4">Upcoming Events</h1>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {events.map(event => (
-
+{/*                         {events.map(event => (
 
                             <div key={event.id} className="bg-white text-black p-4 rounded shadow">
                                 <Link to={`/events/${event.id}`}>
@@ -113,7 +112,7 @@ const Dashboard = ({ eventId }) => {
                                         {new Date(event.start_time).toLocaleString()} → {new Date(event.end_time).toLocaleString()}
                                     </p>
                                     {event.image_url && (
-                                        <img src={`http://localhost:5000${event.image_url}`} alt="event" className="w-full h-40 object-cover mt-2 rounded" />
+                                        <img src={`http://localhost:5000${event.image_url}`} alt="event" className="w-[25%] h-40 object-cover mt-2 rounded" />
                                     )}
                                     <p className="mt-2">{event.event_description}</p>
                                 </Link>
@@ -134,8 +133,53 @@ const Dashboard = ({ eventId }) => {
                                     ))}
                                 </div>
                             </div>
+                            ))}  */}
 
-                            ))} 
+
+
+
+
+                        {events.map(event => (
+
+                            <div key={event.id} className="bg-white text-black p-4 rounded shadow">
+                                <Link to={`/events/${event.id}`}>
+
+                                    <div className="grid grid-col grid-cols-[1fr_3fr] gap-x-[1em]">
+                                        <div>
+                                            {event.image_url && (
+                                                <img src={`http://localhost:5000${event.image_url}`} alt="event" className="w-full h-40 object-cover mt-2 rounded" />
+                                            )}
+                                        </div>
+                                        <div>
+                                            <h2 className="text-xl font-semibold">{event.event_name}</h2>
+                                            <p className="text-sm text-gray-600">{event.event_location}</p>
+                                            <p className="text-sm text-gray-600">
+                                                {new Date(event.start_time).toLocaleString()} → {new Date(event.end_time).toLocaleString()}
+                                            </p>
+                                            <p className="mt-2">{event.event_description}</p>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </Link>
+
+                                <div className="flex space-x-4 mt-4">
+                                    {['Going', 'Interested', 'Liked'].map((reaction) => (
+                                        <button
+                                            key={reaction}
+                                            className={`px-4 py-2 rounded transition ${
+                                                selectedReactions[event.id] === reaction
+                                                    ? 'bg-blue-600 text-white'
+                                                    : 'bg-gray-200 hover:bg-blue-500 hover:text-white'
+                                                }`}
+                                            onClick={() => handleReact(event.id, reaction)}
+                                        >
+                                            {reaction}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                            ))}
 
                         <div className="items-center justify-center rounded-[45px] cursor-pointer flex bg-cyan-500/40 h-[40vh] w-[30vw]"
                             onClick={handleCreateEvent}>
