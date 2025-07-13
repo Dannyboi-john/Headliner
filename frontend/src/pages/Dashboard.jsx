@@ -4,6 +4,7 @@ import bigIcon from '../assets/icon-big-nobg.png';
 import { useNavigate } from 'react-router-dom';
 import plusIcon from '../assets/plus-circle.svg';
 import axios from 'axios';
+import LikeButton from '../components/LikeButton';
 
 const Dashboard = ({ eventId }) => {
 
@@ -158,12 +159,12 @@ const Dashboard = ({ eventId }) => {
                                             </p>
                                             <p className="mt-2">{event.event_description}</p>
                                         </div>
-                                    </div>
-                                    
-                                    
+                                    </div>                                    
                                 </Link>
+                                <LikeButton eventId={event.id} />
 
-                                <div className="flex space-x-4 mt-4">
+
+{/*                                 <div className="flex space-x-4 mt-4">
                                     {['Going', 'Interested', 'Liked'].map((reaction) => (
                                         <button
                                             key={reaction}
@@ -177,7 +178,7 @@ const Dashboard = ({ eventId }) => {
                                             {reaction}
                                         </button>
                                     ))}
-                                </div>
+                                </div> */}
                             </div>
                             ))}
 
